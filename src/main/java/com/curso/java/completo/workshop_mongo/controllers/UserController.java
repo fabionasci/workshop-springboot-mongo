@@ -2,6 +2,7 @@ package com.curso.java.completo.workshop_mongo.controllers;
 
 
 import com.curso.java.completo.workshop_mongo.domain.User;
+import com.curso.java.completo.workshop_mongo.services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,10 +14,17 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
 
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
     @GetMapping
     public ResponseEntity<List<User>>findAll() {
-        User maria = new User("1", "Maria", "maria@gmail.com");
-        User alex = new User("2", "Alex", "alex@gmail.com");
-        return ResponseEntity.ok().body(List.of(maria, alex));
+
+        List<User> users = userService.findAll();
+
+        return ResponseEntity.ok().body(users);
     }
 }

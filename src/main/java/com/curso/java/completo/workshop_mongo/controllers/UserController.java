@@ -6,6 +6,7 @@ import com.curso.java.completo.workshop_mongo.dto.UserDto;
 import com.curso.java.completo.workshop_mongo.services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,5 +30,11 @@ public class UserController {
         List<UserDto> dtoList = users.stream().map(UserDto::new).toList();
 
         return ResponseEntity.ok().body(dtoList);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<UserDto>findById(@PathVariable String id){
+        User user = userService.findById(id);
+        return ResponseEntity.ok().body(new UserDto(user));
     }
 }

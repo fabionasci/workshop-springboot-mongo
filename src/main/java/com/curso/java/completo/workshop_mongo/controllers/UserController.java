@@ -1,6 +1,7 @@
 package com.curso.java.completo.workshop_mongo.controllers;
 
 
+import com.curso.java.completo.workshop_mongo.domain.Post;
 import com.curso.java.completo.workshop_mongo.domain.User;
 import com.curso.java.completo.workshop_mongo.dto.UserDto;
 import com.curso.java.completo.workshop_mongo.services.UserService;
@@ -56,5 +57,11 @@ public class UserController {
         userDto.setId(id);
         User user = userService.update(userDto);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}/posts")
+    public ResponseEntity<List<Post>>findPosts(@PathVariable String id){
+        User user = userService.findById(id);
+        return ResponseEntity.ok().body(user.getPosts());
     }
 }

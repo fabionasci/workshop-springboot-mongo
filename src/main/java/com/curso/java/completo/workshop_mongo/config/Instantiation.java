@@ -2,6 +2,7 @@ package com.curso.java.completo.workshop_mongo.config;
 
 import com.curso.java.completo.workshop_mongo.domain.Post;
 import com.curso.java.completo.workshop_mongo.domain.User;
+import com.curso.java.completo.workshop_mongo.dto.AuthorDto;
 import com.curso.java.completo.workshop_mongo.repository.PostRepository;
 import com.curso.java.completo.workshop_mongo.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -28,6 +29,7 @@ public class Instantiation implements CommandLineRunner {
         sdf.setTimeZone(java.util.TimeZone.getTimeZone("GMT"));
 
         System.out.println("Limpando banco de dados");
+        postRepository.deleteAll();
         userRepository.deleteAll();
 
         System.out.println("Instanciando objetos");
@@ -35,8 +37,8 @@ public class Instantiation implements CommandLineRunner {
         User alex = new User(null, "Alex Green", "alex@gmail.com");
         User bob = new User(null, "Bob Grey", "bob@gmail.com");
 
-        Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu Viagem!", "Vou viajar para São Paulo. Abraços!", maria);
-        Post post2 = new Post(null, sdf.parse("23/03/2018"), "Bom dia!", "Acordei feliz hoje!", maria);
+        Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu Viagem!", "Vou viajar para São Paulo. Abraços!", new AuthorDto(maria));
+        Post post2 = new Post(null, sdf.parse("23/03/2018"), "Bom dia!", "Acordei feliz hoje!", new AuthorDto(maria));
 
         System.out.println("Salvando objetos");
         userRepository.save(maria);
@@ -44,5 +46,6 @@ public class Instantiation implements CommandLineRunner {
         userRepository.save(bob);
 
         postRepository.save(post1);
+        postRepository.save(post2);
     }
 }

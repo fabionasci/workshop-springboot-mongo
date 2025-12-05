@@ -1,13 +1,16 @@
 package com.curso.java.completo.workshop_mongo.domain;
 
+import com.curso.java.completo.workshop_mongo.dto.AuthorDto;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 
 @Document
 public class Post implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -15,13 +18,13 @@ public class Post implements Serializable {
     private Date date;
     private String title;
     private String content;
-    private User author;
+    private AuthorDto author;
 
 
     public Post() {
     }
 
-    public Post(String id, Date date, String title, String content, User author) {
+    public Post(String id, Date date, String title, String content, AuthorDto author) {
         this.id = id;
         this.date = date;
         this.title = title;
@@ -62,10 +65,10 @@ public class Post implements Serializable {
         this.content = content;
     }
 
-    public User getAuthor() {
+    public AuthorDto getAuthor() {
         return author;
     }
-    public void setAuthor(User author) {
+    public void setAuthor(AuthorDto author) {
         this.author = author;
     }
 

@@ -9,6 +9,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 
 @Configuration
@@ -41,11 +42,10 @@ public class Instantiation implements CommandLineRunner {
         Post post2 = new Post(null, sdf.parse("23/03/2018"), "Bom dia!", "Acordei feliz hoje!", new AuthorDto(maria));
 
         System.out.println("Salvando objetos");
-        userRepository.save(maria);
-        userRepository.save(alex);
-        userRepository.save(bob);
+        userRepository.saveAll(Arrays.asList(maria, alex, bob));
+        postRepository.saveAll(Arrays.asList(post1, post2));
 
-        postRepository.save(post1);
-        postRepository.save(post2);
+        maria.getPosts().addAll(Arrays.asList(post1, post2));
+        userRepository.save(maria);
     }
 }

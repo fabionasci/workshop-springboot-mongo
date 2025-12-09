@@ -1,8 +1,6 @@
 package com.curso.java.completo.workshop_mongo.controllers;
 
 import com.curso.java.completo.workshop_mongo.domain.Post;
-import com.curso.java.completo.workshop_mongo.domain.User;
-import com.curso.java.completo.workshop_mongo.dto.UserDto;
 import com.curso.java.completo.workshop_mongo.services.PostService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -2,7 +2,10 @@ package com.curso.java.completo.workshop_mongo.controllers.util;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-@Deprecated
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+
 public class URL {
 
     public static final String decodeParam(String text) {
@@ -13,5 +16,15 @@ public class URL {
         }
     }
 
+    public static Date convertToDate(String date, Date defaultValue) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        sdf.setTimeZone(java.util.TimeZone.getTimeZone("GMT"));
+
+        try {
+            return sdf.parse(date);
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
 
 }
